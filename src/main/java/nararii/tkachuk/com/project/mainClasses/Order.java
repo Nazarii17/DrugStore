@@ -16,6 +16,7 @@ public class Order implements CSVSerializable {
     private int productID;
     private BigDecimal price;
 
+
     public Order(LocalDate dateOfOrder, Integer quantity, Customer customer, Product product) {
         this.dateOfOrder = dateOfOrder;
         this.quantity = quantity;
