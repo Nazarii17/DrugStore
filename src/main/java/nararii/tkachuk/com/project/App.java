@@ -75,7 +75,6 @@ public class App {
 //
 //        App.getCustomer(s);
 //        System.out.println(s);
-
     }
 
     public static ArrayList<Customer> returnlist(ArrayList<String[]> list) {
