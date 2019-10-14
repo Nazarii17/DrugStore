@@ -30,28 +30,6 @@ public class App {
         customers.add(customer4);
         customers.add(customer5);
 
-
-//        ArrayList <String> temporary = filesReader.getLinesFromFile("customers.csv");
-////        System.out.println(temporary);
-//        String[] strings = temporary.get(2).split(",");
-//        System.out.println(Arrays.toString(strings));
-//        Customer cus = new Customer(strings[0].trim(),strings[1].trim(),Integer.parseInt(strings[2].trim()),strings[3].trim());
-//        System.out.println(cus.toFileString());
-
-        ArrayList<String[]> temporary = filesReader.getObjectsfromFile("customers.csv");
-        ArrayList<Customer> customerArrayList =  App.returnlist(temporary);
-
-        System.out.println(customerArrayList.get(0));
-
-//        System.out.println(customerArrayList);
-
-
-//        String s = "Jack,"+"Bush,"+ "1," +"503730412";
-//
-//        App.getCustomer(s);
-//        System.out.println(s);
-
-
 //        Product product1 = new Product("Critical+", 1, new BigDecimal("25"), "Упаковка: 3 насіння." +
 //                "Виробник: Dinafem Seeds. Різновид: сатіва 50%; індика 50%. " + "Ефект: потужний; збалансований. " +
 //                "Фем. / Рег. : фемінізовані. Цвітіння: 45-50 днів. " + "Розмір: 2.5 м. " +
@@ -80,22 +58,23 @@ public class App {
 //        orders.add(order3);
 //        orders.add(order4);
 //
-////      filesWriter.writeTextToFile("customers.csv", CSVFormatterUtil.toCSVString(customers));
+//      filesWriter.writeTextToFile("customers.csv", CSVFormatterUtil.toCSVString(customers));
 ////      filesWriter.writeTextToFile("products.csv", CSVFormatterUtil.toCSVString(products));
 ////      filesWriter.writeTextToFile("orders.csv", CSVFormatterUtil.toCSVString(orders));
-////        filesReader.readFromFile("customers.csv");
 
-//        filesWriter.writeTextToFile("customers.csv",cus.toFileString());
+        ArrayList<String[]> temporary = filesReader.getObjectsfromFile("customers.csv");
+        ArrayList<Customer> customerArrayList =  App.returnlist(temporary);
 
-    }
+        System.out.println(customerArrayList.get(0));
 
-    public static Object[] getCustomer(String s) {
-        Object[] objects = s.split(",");
-//        Customer customer;
-//        String[] strings ;
-//       customer = new Customer(strings[0],strings[1],Integer.parseInt(strings[2]),strings[3]);
-//       objects = strings;
-        return objects;
+        System.out.println(customerArrayList.toString());
+        filesWriter.writeTextToFile("customers.csv", CSVFormatterUtil.toCSVString(customerArrayList));
+
+
+//        String s = "Jack,"+"Bush,"+ "1," +"503730412";
+//
+//        App.getCustomer(s);
+//        System.out.println(s);
 
     }
 

@@ -42,7 +42,6 @@ public class FilesReader {
                 e.printStackTrace();
             }
         }
-
         return strings;
     }
 
@@ -51,14 +50,12 @@ public class FilesReader {
         ArrayList <String> temporary = getLinesFromFile(filepath);
         for (int i = 0; i < temporary.size(); i++){
             String[] strings = temporary.get(i).split(",");
-//            System.out.println(Arrays.toString(strings));
             listToReturn.add(strings);
         }
 //        System.out.println(Arrays.toString(listToReturn.get(0)));
 //        System.out.println(Arrays.toString(listToReturn.get(4)));
         return listToReturn;
     }
-
 }
 
 
