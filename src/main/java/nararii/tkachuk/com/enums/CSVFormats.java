@@ -1,9 +1,9 @@
-package main.java.nararii.tkachuk.com.project.csvFiles;
+package nararii.tkachuk.com.enums;
 
 public enum CSVFormats {
 
     CUSTOMER("%-15s%-15s%-15s%-15s%n"),
-    ORDER("%-15s%-15s%-15s%-15s%-15s%n"),
+    ORDER("%-15s%-15s%-15s%-15s%-15s%-15s%n"),
     PRODUCT("%-20s%-15s%-15s%-1500s%n");
 
     private String formatValue;

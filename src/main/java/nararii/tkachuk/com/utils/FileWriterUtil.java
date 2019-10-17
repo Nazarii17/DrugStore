@@ -1,41 +1,27 @@
-package main.java.nararii.tkachuk.com.project.io;
+package nararii.tkachuk.com.utils;
 
 import java.io.*;
 
-public class FilesWriter {
+public final class FileWriterUtil {
 
-
-    private String fileURLandName;
-
-
-    public String getFileURLandName() {
-        return fileURLandName;
+    private FileWriterUtil() {
+        throw new UnsupportedOperationException();
     }
 
-
-    public String setFileURLandName(String fileURLandName) {
-        this.fileURLandName = fileURLandName;
-        return fileURLandName;
-    }
-
-
-    public String createFileIfNotExists(String URL) {
-
-        setFileURLandName(URL);
+    private static String createFileIfNotExists(String URL) {
 
         try {
-            File fileName = new File(getFileURLandName());
+            File fileName = new File(URL);
             if (!fileName.exists()) {
                 fileName.createNewFile();
-                System.out.println("File " + getFileURLandName() + " created");
-            } else System.out.println("File " + getFileURLandName() + " already existed");
+                System.out.println("File " + URL + " created");
+            } else System.out.println("File " + URL + " already existed");
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Error" + e);
         }
-        return setFileURLandName(URL);
+        return URL;
     }
-
     //    public void writeTextToFile(String text) {
 //
 //        FileWriter fileWriter;
@@ -79,7 +65,7 @@ public class FilesWriter {
 //
 //        try (PrintWriter writer = new PrintWriter(filePath)) {
 //
-//            writer.print(CSVFormatterUtil.toCSVString(objects, format));
+//            writer.print(CSVFormatterUtil.toCSVWithFormatString(objects, format));
 //
 //        } catch (FileNotFoundException e) {
 //            e.printStackTrace();
@@ -97,7 +83,7 @@ public class FilesWriter {
 //            e.printStackTrace();
 //        }
 //    }
-    public void writeTextToFile(String filePath, String content) {
+    public static void  writeTextToFile(String filePath, String content) {
 
         createFileIfNotExists(filePath);
 
@@ -115,5 +101,23 @@ public class FilesWriter {
             printWriter.close();
         }
     }
-}
 
+    public static void  overwriteTextToFile(String filePath, String content) {
+
+        createFileIfNotExists(filePath);
+
+        FileWriter fileWriter;
+        BufferedWriter bufferedWriter;
+        PrintWriter printWriter = null;
+        try {
+            fileWriter = new FileWriter(filePath, false);
+            bufferedWriter = new BufferedWriter(fileWriter);
+            printWriter = new PrintWriter(bufferedWriter);
+            printWriter.print(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            printWriter.close();
+        }
+    }
+}
