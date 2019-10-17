@@ -6,6 +6,8 @@ import nararii.tkachuk.com.utils.FileReaderUtil;
 
 import java.util.List;
 
+import static nararii.tkachuk.com.services.EntityIDService.*;
+
 public final class CustomerService {
     private CustomerService() {
         throw new UnsupportedOperationException();
@@ -33,10 +35,13 @@ public final class CustomerService {
         return correctOne;
     }
 
-    public static Customer createNewCustomer(String filePath, String firstName, String lastName, String phoneNumber){
+    public static synchronized Customer createNewCustomer(String filePath, String firstName, String lastName, String phoneNumber){
         EntityIDService.createFileWithMaxID(filePath, new CustomerMapper());
 
-        Integer id = EntityIDService.generateID(EntityIDService.getIDFilePath(filePath));
+        Integer id = EntityIDService.generateID(getIDFilePath(filePath));
+
+        overwriteIDinFile(getIDFilePath(filePath), id.toString());
+        System.out.println(id);
 
         return new Customer(firstName,lastName,id,phoneNumber);
     }

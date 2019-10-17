@@ -14,6 +14,8 @@ public final class EntityIDService {
         throw new UnsupportedOperationException();
     }
 
+
+
     public static String findMaxID(List<EntityID> list) {
         ArrayList<Integer> IDList = new ArrayList<>();
 
@@ -27,14 +29,29 @@ public final class EntityIDService {
 //        return stringBuffer.toString();
     }
 
+
+    public static Integer getMaxIDFromExistedFile(String filePath){
+        String string = FileReaderUtil.readStringFromFile(filePath);
+        int id = Integer.parseInt(string.trim());
+        System.out.println(id);
+        return id;
+    }
+
     public static void writeIDtoFile(String filePath, List<? extends EntityID> list) {
         findMaxID((List<EntityID>) list);
         FileWriterUtil.overwriteTextToFile(filePath, findMaxID((List<EntityID>) list));
     }
 
-    public static int generateID(String filePath) {
-        int ID = Integer.parseInt(FileReaderUtil.readStringFromFile(filePath).trim());
-        return ID + 1;
+    public static void overwriteIDinFile(String filePath, String id) {
+
+        FileWriterUtil.overwriteTextToFile(filePath, id);
+    }
+
+    public static Integer generateID(String filePath) {
+//         id = Integer.parseInt(FileReaderUtil.readStringFromFile(filePath).trim());
+         int id = getMaxIDFromExistedFile(filePath);
+
+        return id + 1;
     }
 
     public static String getIDFilePath(String filePath){
