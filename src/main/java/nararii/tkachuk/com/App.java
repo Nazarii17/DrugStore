@@ -89,7 +89,6 @@ public class App {
 
 
 
-
         Customer newCustomer = CustomerService.createNewCustomer("customers.csv",
                 "Alah","Babah","987321324");
 
