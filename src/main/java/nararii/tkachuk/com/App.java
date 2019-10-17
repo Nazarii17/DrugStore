@@ -92,13 +92,12 @@ public class App {
 
         Customer newCustomer = CustomerService.createNewCustomer("customers.csv",
                 "Alah","Babah","987321324");
+        customers.add(newCustomer);
+        FileWriterUtil.overwriteTextToFile("customers.csv", CSVFormatterUtil.toCSVStringNoFormat(customers));
 
         Customer newCustomer1 = CustomerService.createNewCustomer("customers.csv",
                 "Jack","Daniels","987371354");
-
-        customers.add(newCustomer);
         customers.add(newCustomer1);
-
         FileWriterUtil.overwriteTextToFile("customers.csv", CSVFormatterUtil.toCSVStringNoFormat(customers));
 
 
