@@ -39,8 +39,7 @@ public class CustomerService {
 
         EntityIDService.createFileWithMaxID(filePath, new CustomerMapper());
 
-
-        return new Customer(firstName, lastName, EntityIDService.generateID(EntityIDService.getIDFilePath(filePath)), phoneNumber);
+        return new Customer(firstName, lastName, EntityIDService.generateIDFromFile(EntityIDService.getIDFilePath(filePath)), phoneNumber);
     }
 }
 

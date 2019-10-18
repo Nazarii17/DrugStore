@@ -67,8 +67,8 @@ public class App {
 
 
 //        List<Product> productList = FileReaderUtil.readObjects("products.csv", new ProductMapper());
-
-//        FileWriterUtil.writeTextToFile("products.csv", CSVFormatterUtil.toCSVStringNoFormat(customersList));
+//
+//        FileWriterUtil.writeTextToFile("products1.csv", CSVFormatterUtil.toCSVStringNoFormat(productList));
 
 //        FileWriterUtil.writeTextToFile("orders+.csv", CSVFormatterUtil.toCSVStringWithFormat(orders));
 //        FileWriterUtil.writeTextToFile("orders-.csv", CSVFormatterUtil.toCSVStringNoFormat(orders));
@@ -83,7 +83,7 @@ public class App {
 //        EntityIDService.writeMaxIDFromListToFile("id.csv",products);
 
 //        System.out.println(FileReaderUtil.readStringFromFile("id.csv"));
-//        System.out.println(EntityIDService.generateID("id.csv"));
+//        System.out.println(EntityIDService.generateIDFromFile("id.csv"));
 
 
 
@@ -99,9 +99,13 @@ public class App {
 //        customers.add(newCustomer1);
 //        FileWriterUtil.writeTextToFile("customers.csv", newCustomer1.toCSVFileString());
 
-        Product newProduct = new ProductService().createNewProduct("products.csv","Жорстке єбашиво", 20.53,"Мама мене їбошить");
+        Product newProduct = ProductService.createNewProduct("products.csv","Жорстке єбашиво",
+                                                                   20.40,"Мама мене їбошить");
         products.add(newProduct);
         FileWriterUtil.writeTextToFile("products.csv", newProduct.toCSVFileString());
+
+
+
 
     }
 }

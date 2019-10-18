@@ -1,9 +1,7 @@
 package nararii.tkachuk.com.utils;
 
 public final class ValidatorUtil {
-    private ValidatorUtil() {throw new UnsupportedOperationException();
-    }
-
+    private ValidatorUtil() {throw new UnsupportedOperationException(); }
 
     public static boolean validatePhoneNumber(String phoneNumber) {
         //validate phone numbers of format "1234567890"
@@ -17,6 +15,4 @@ public final class ValidatorUtil {
             //return false if nothing matches the input
         else return false;
     }
-
-
 }
