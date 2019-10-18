@@ -3,8 +3,7 @@ package nararii.tkachuk.com;
 import nararii.tkachuk.com.entities.Customer;
 import nararii.tkachuk.com.entities.Order;
 import nararii.tkachuk.com.entities.Product;
-import nararii.tkachuk.com.services.CustomerService;
-import nararii.tkachuk.com.utils.CSVFormatterUtil;
+import nararii.tkachuk.com.services.ProductService;
 import nararii.tkachuk.com.utils.FileWriterUtil;
 
 import java.math.BigDecimal;
@@ -81,7 +80,7 @@ public class App {
 //        FileWriterUtil.writeTextToFile("orders-1.csv", CSVFormatterUtil.toCSVStringNoFormat(orders2));
 
 
-//        EntityIDService.writeIDtoFile("id.csv",products);
+//        EntityIDService.writeMaxIDFromListToFile("id.csv",products);
 
 //        System.out.println(FileReaderUtil.readStringFromFile("id.csv"));
 //        System.out.println(EntityIDService.generateID("id.csv"));
@@ -90,16 +89,19 @@ public class App {
 
 
 
-        Customer newCustomer = CustomerService.createNewCustomer("customers.csv",
-                "Alah","Babah","987321324");
-        customers.add(newCustomer);
-        FileWriterUtil.overwriteTextToFile("customers.csv", CSVFormatterUtil.toCSVStringNoFormat(customers));
+//        Customer newCustomer = CustomerService.createNewCustomer("customers.csv",
+//                "Alah","Babah","981374239");
+//        customers.add(newCustomer);
+//        FileWriterUtil.writeTextToFile("customers.csv", newCustomer.toCSVFileString());
+//
+//        Customer newCustomer1 = CustomerService.createNewCustomer("customers.csv",
+//                "Jack","Daniels","987735554");
+//        customers.add(newCustomer1);
+//        FileWriterUtil.writeTextToFile("customers.csv", newCustomer1.toCSVFileString());
 
-        Customer newCustomer1 = CustomerService.createNewCustomer("customers.csv",
-                "Jack","Daniels","987371354");
-        customers.add(newCustomer1);
-        FileWriterUtil.overwriteTextToFile("customers.csv", CSVFormatterUtil.toCSVStringNoFormat(customers));
-
+        Product newProduct = new ProductService().createNewProduct("products.csv","Жорстке єбашиво", 20.53,"Мама мене їбошить");
+        products.add(newProduct);
+        FileWriterUtil.writeTextToFile("products.csv", newProduct.toCSVFileString());
 
     }
 }

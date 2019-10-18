@@ -7,10 +7,7 @@ import nararii.tkachuk.com.utils.FileReaderUtil;
 import java.time.LocalDate;
 import java.util.List;
 
-public final class OrderService {
-    private OrderService() {
-        throw new UnsupportedOperationException();
-    }
+public class OrderService {
 
     public static Order getOrdererById(String filePath, int ID) {
         List<Order> orderList = FileReaderUtil.readObjects(filePath, new OrderMapper());
@@ -34,4 +31,6 @@ public final class OrderService {
         }
         return correctOne;
     }
+
+
 }

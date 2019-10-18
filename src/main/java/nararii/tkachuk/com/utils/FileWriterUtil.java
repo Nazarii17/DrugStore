@@ -8,7 +8,7 @@ public final class FileWriterUtil {
         throw new UnsupportedOperationException();
     }
 
-    private static String createFileIfNotExists(String URL) {
+    public static String createFileIfNotExists(String URL) {
 
         try {
             File fileName = new File(URL);
