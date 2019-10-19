@@ -33,13 +33,24 @@ public class CustomerService {
 
     public static Customer createNewCustomer(String filePath, String firstName, String lastName, String phoneNumber) {
 
-        if ((!ValidatorUtil.validatePhoneNumber(phoneNumber) | EntityIDService.isPhoneNumberExist(filePath, phoneNumber))) {
+        if ((!ValidatorUtil.validatePhoneNumber(phoneNumber) | isPhoneNumberExist(filePath, phoneNumber))) {
             throw new RuntimeException("Далбайоб, введи нормальний телефон, гавно ти собаче, щоб тебе качка копнула, сука!!!");
         }
 
         EntityIDService.createFileWithMaxID(filePath, new CustomerMapper());
 
         return new Customer(firstName, lastName, EntityIDService.generateIDFromFile(EntityIDService.getIDFilePath(filePath)), phoneNumber);
+    }
+
+    public static Boolean isPhoneNumberExist(String filePath, String phoneNumber) {
+        List<Customer> customerList = FileReaderUtil.readObjects(filePath, new CustomerMapper());
+
+        for (Customer customer : customerList) {
+            if (customer.getPhoneNumber().equals(phoneNumber)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

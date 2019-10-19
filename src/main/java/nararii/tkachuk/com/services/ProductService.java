@@ -34,6 +34,13 @@ public class ProductService {
 
     public static Product createNewProduct(String filePath, String name, Double price, String info){
 
+       if (EntityIDService.isPriceNotZero(new BigDecimal(price))){
+        throw new RuntimeException("Price can't be zero!!!");
+       }
+       if (EntityIDService.isNameExist(filePath, name, new ProductMapper())){
+           throw new RuntimeException("The product \"" + name.toUpperCase() + "\" is exist!!!");
+       }
+
         EntityIDService.createFileWithMaxID(filePath, new ProductMapper());
 
         return new Product(

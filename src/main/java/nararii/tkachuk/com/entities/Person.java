@@ -2,8 +2,8 @@ package nararii.tkachuk.com.entities;
 
 import java.util.Objects;
 
-public class Person extends EntityID {
-    protected String firstName;
+public class Person extends Nameble {
+    protected String name;
     protected String lastName;
     protected Integer id;
 
@@ -11,18 +11,18 @@ public class Person extends EntityID {
         this.id = id;
     }
 
-    public Person(String firstName, String lastName, Integer id) {
-        this.firstName = firstName;
+    public Person(String name, String lastName, Integer id) {
+        this.name = name;
         this.lastName = lastName;
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLastName() {
@@ -44,7 +44,7 @@ public class Person extends EntityID {
     @Override
     public String toString() {
         return "Person{" +
-                "first_name='" + firstName + '\'' +
+                "first_name='" + name + '\'' +
                 ", last_name='" + lastName + '\'' +
                 ", id=" + id +
                 '}';
@@ -56,13 +56,13 @@ public class Person extends EntityID {
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
         return getId() == person.getId() &&
-                getFirstName().equals(person.getFirstName()) &&
+                getName().equals(person.getName()) &&
                 getLastName().equals(person.getLastName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFirstName(), getLastName(), getId());
+        return Objects.hash(getName(), getLastName(), getId());
     }
 
     @Override

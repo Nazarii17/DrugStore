@@ -4,7 +4,7 @@ import nararii.tkachuk.com.enums.CSVFormats;
 
 import java.math.BigDecimal;
 
-public class Product extends EntityID implements CSVSerializable {
+public class Product extends Nameble implements CSVSerializable {
     private String name;
     private Integer id;
     private BigDecimal price;

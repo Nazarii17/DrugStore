@@ -29,7 +29,7 @@ public class Customer extends Person implements CSVSerializable {
     @Override
     public String toString() {
         return "Customer{" +
-                "First name = '" + firstName + '\'' +
+                "First name = '" + name + '\'' +
                 ", Last name = '" + lastName + '\'' +
                 ", ID = " + id +
                 ", phone number = +380" + phoneNumber +
@@ -38,12 +38,12 @@ public class Customer extends Person implements CSVSerializable {
 
     @Override
     public String toCSVWithFormatString() {
-        return String.format(CSVFormats.CUSTOMER.getFormatValue(), firstName+",", lastName+",", id+",", phoneNumber);
+        return String.format(CSVFormats.CUSTOMER.getFormatValue(), name +",", lastName+",", id+",", phoneNumber);
     }
 
     @Override
     public String toCSVFileString() {
-        return firstName + "," + lastName + "," + id + "," + phoneNumber+"\n";
+        return name + "," + lastName + "," + id + "," + phoneNumber+"\n";
     }
 
     @Override

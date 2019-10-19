@@ -3,13 +3,18 @@ package nararii.tkachuk.com;
 import nararii.tkachuk.com.entities.Customer;
 import nararii.tkachuk.com.entities.Order;
 import nararii.tkachuk.com.entities.Product;
+import nararii.tkachuk.com.mappers.ProductMapper;
+import nararii.tkachuk.com.services.OrderService;
 import nararii.tkachuk.com.services.ProductService;
+import nararii.tkachuk.com.utils.CSVFormatterUtil;
+import nararii.tkachuk.com.utils.FileReaderUtil;
 import nararii.tkachuk.com.utils.FileWriterUtil;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.List;
 
 public class App {
     public static String filePath = "cusomers.csv";
@@ -61,9 +66,7 @@ public class App {
         orders.add(order4);
 
 
-//        List<Product> test = FileReaderUtil.readObjects("products.csv", new ProductMapper());
-//        FileWriterUtil.writeTextToFile("orders.csv", CSVFormatterUtil.toCSVStringNoFormat(orders));
-//        FileWriterUtil.writeTextToFile("products.csv",CSVFormatterUtil.toCSVStringNoFormat(products));
+//        FileWriterUtil.writeTextToFile("orders.csv",CSVFormatterUtil.toCSVStringNoFormat(orders));
 
 
 //        List<Product> productList = FileReaderUtil.readObjects("products.csv", new ProductMapper());
@@ -99,10 +102,22 @@ public class App {
 //        customers.add(newCustomer1);
 //        FileWriterUtil.writeTextToFile("customers.csv", newCustomer1.toCSVFileString());
 
-        Product newProduct = ProductService.createNewProduct("products.csv","Жорстке єбашиво",
-                                                                   20.40,"Мама мене їбошить");
-        products.add(newProduct);
-        FileWriterUtil.writeTextToFile("products.csv", newProduct.toCSVFileString());
+//        Product newProduct = ProductService.createNewProduct("products.csv","Жорсткезне єбашиво",
+//                                                                   20.40,"Мама мене їбошить");
+//        products.add(newProduct);
+//        FileWriterUtil.writeTextToFile("products.csv", newProduct.toCSVFileString());
+//        Product newProduct1 = ProductService.createNewProduct("products.csv","Коломийський грьоб",
+//                                                                   4.40,"Тату, мене їбошить");
+//        products.add(newProduct1);
+//        FileWriterUtil.writeTextToFile("products.csv", newProduct1.toCSVFileString());
+
+
+        Order newOrder = OrderService.createNewOrder("orders.csv", 993,11,30,1000,3,5);
+        orders.add(newOrder);
+        FileWriterUtil.writeTextToFile("orders.csv",newOrder.toCSVFileString());
+
+
+
 
 
 

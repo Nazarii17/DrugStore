@@ -119,7 +119,6 @@ public class Order extends EntityID implements CSVSerializable {
         return Objects.hash(getId(), getDateOfOrder(), getQuantity(), customerID, productID, price);
     }
 
-
     private class DateofOrder {
         LocalDate localDate;
         DateTimeFormatter dateTimeFormatter;

@@ -1,7 +1,9 @@
 package nararii.tkachuk.com.services;
 
+import nararii.tkachuk.com.entities.CSVSerializable;
 import nararii.tkachuk.com.entities.Customer;
 import nararii.tkachuk.com.entities.EntityID;
+import nararii.tkachuk.com.entities.Nameble;
 import nararii.tkachuk.com.mappers.CSVMapper;
 import nararii.tkachuk.com.mappers.CustomerMapper;
 import nararii.tkachuk.com.utils.FileReaderUtil;
@@ -68,6 +70,19 @@ public class EntityIDService {
 //        money.compareTo(BigDecimal.ZERO) == 0 // true
 //        new BigDecimal("0.00").compareTo(BigDecimal.ZERO) == 0 // true
 
+    }
+
+    public static <T extends Nameble> boolean isNameExist(String filePath, String name, CSVMapper<T> csvMapper){
+
+        List<T> list = FileReaderUtil.readObjects(filePath, csvMapper);
+
+        for (T t : list){
+            if (t.getName().equals(name)){
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
