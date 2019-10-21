@@ -129,6 +129,7 @@ public class App {
 
 //        ProductService.editProductByID("products.csv", 2,"Косів Гуцулія+",100.33,"Зарплата у вчителів = 4000");
 
+        FileWriterUtil.writeTextToFile("orders.csv", CSVFormatterUtil.toCSVStringNoFormat(orders));
         List<Order> list = FileReaderUtil.readObjects("orders.csv",new OrderMapper());
         FileWriterUtil.writeTextToFile("orders.csv", CSVFormatterUtil.toCSVStringNoFormat(list));
 
