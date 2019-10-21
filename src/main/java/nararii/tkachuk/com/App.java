@@ -3,7 +3,8 @@ package nararii.tkachuk.com;
 import nararii.tkachuk.com.entities.Customer;
 import nararii.tkachuk.com.entities.Order;
 import nararii.tkachuk.com.entities.Product;
-import nararii.tkachuk.com.mappers.ProductMapper;
+import nararii.tkachuk.com.mappers.OrderMapper;
+import nararii.tkachuk.com.services.CustomerService;
 import nararii.tkachuk.com.services.OrderService;
 import nararii.tkachuk.com.services.ProductService;
 import nararii.tkachuk.com.utils.CSVFormatterUtil;
@@ -107,14 +108,31 @@ public class App {
 //        products.add(newProduct);
 //        FileWriterUtil.writeTextToFile("products.csv", newProduct.toCSVFileString());
 //        Product newProduct1 = ProductService.createNewProduct("products.csv","Коломийський грьоб",
-//                                                                   4.40,"Тату, мене їбошить");
+//                                                                   4.40,"Тату мене їбошить");
 //        products.add(newProduct1);
 //        FileWriterUtil.writeTextToFile("products.csv", newProduct1.toCSVFileString());
 
 
-        Order newOrder = OrderService.createNewOrder("orders.csv", 993,11,30,1000,3,5);
-        orders.add(newOrder);
-        FileWriterUtil.writeTextToFile("orders.csv",newOrder.toCSVFileString());
+//        List<Order> list = FileReaderUtil.readObjects("orders.csv",new OrderMapper());
+//        System.out.println(list.get(0));
+//        FileWriterUtil.writeTextToFile("orders.csv", CSVFormatterUtil.toCSVStringNoFormat(list));
+
+//        Order newOrder = OrderService.createNewOrder("orders.csv", 993,11,30,1000,3,5);
+//        orders.add(newOrder);
+//        FileWriterUtil.writeTextToFile("orders.csv",newOrder.toCSVFileString());
+
+
+//        OrderService.deleteOrderByID("orders.csv",4);
+
+//        ProductService.deleteProductByID("products.csv", 6);
+
+//        CustomerService.deleteCustomerByID("customers.csv", 22);
+
+        CustomerService.editCustomerByID("customers.csv",32,"Cool","Cash", "231132554");
+
+//        ProductService.editProductByID("products.csv", 2,"Косів Гуцулія+",100.33,"Зарплата у вчителів = 4000");
+
+
 
 
 

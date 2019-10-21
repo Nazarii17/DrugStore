@@ -32,7 +32,6 @@ public class EntityIDService {
         return Collections.max(IDList).toString() + "\n";
     }
 
-
     public static void writeMaxIDFromListToFile(String filePath, List<? extends EntityID> list) {
         findMaxID((List<EntityID>) list);
         FileWriterUtil.overwriteTextToFile(filePath, findMaxID((List<EntityID>) list));
@@ -55,6 +54,16 @@ public class EntityIDService {
 
         for (Customer customer : customerList) {
             if (customer.getPhoneNumber().equals(phoneNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static  <T extends EntityID> Boolean isIDExist(String filePath,Integer id, CSVMapper csvMapper){
+        List<T> IDList = FileReaderUtil.readObjects(filePath, csvMapper);
+        for (T t : IDList){
+            if (t.getId().equals(id)){
                 return true;
             }
         }

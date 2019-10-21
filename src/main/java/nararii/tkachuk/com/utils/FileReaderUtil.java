@@ -55,8 +55,6 @@ public final class FileReaderUtil {
 
         for (String s : strings) {
             stringBuffer.append(s + "\n");
-
-
         }
 
         return stringBuffer.toString();

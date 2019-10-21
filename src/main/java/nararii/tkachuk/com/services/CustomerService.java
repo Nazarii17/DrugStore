@@ -1,15 +1,29 @@
 package nararii.tkachuk.com.services;
 
 import nararii.tkachuk.com.entities.Customer;
+import nararii.tkachuk.com.entities.EntityID;
 import nararii.tkachuk.com.mappers.CustomerMapper;
+import nararii.tkachuk.com.utils.CSVFormatterUtil;
 import nararii.tkachuk.com.utils.FileReaderUtil;
+import nararii.tkachuk.com.utils.FileWriterUtil;
 import nararii.tkachuk.com.utils.ValidatorUtil;
 
 import java.util.List;
 
 public class CustomerService {
 
-    public static Customer getCustomerById(String filePath, int id) {
+    public static Boolean isPhoneNumberExist(String filePath, String phoneNumber) {
+        List<Customer> customerList = FileReaderUtil.readObjects(filePath, new CustomerMapper());
+
+        for (Customer customer : customerList) {
+            if (customer.getPhoneNumber().equals(phoneNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Customer getCustomerByID(String filePath, int id) {
         List<Customer> customerList = FileReaderUtil.readObjects(filePath, new CustomerMapper());
         Customer correctOne = null;
         for (Customer customer : customerList) {
@@ -42,15 +56,38 @@ public class CustomerService {
         return new Customer(firstName, lastName, EntityIDService.generateIDFromFile(EntityIDService.getIDFilePath(filePath)), phoneNumber);
     }
 
-    public static Boolean isPhoneNumberExist(String filePath, String phoneNumber) {
+    public static void deleteCustomerByID(String filePath, int id) {
+        List<Customer> customerList = FileReaderUtil.readObjects(filePath, new CustomerMapper());
+        Customer customer = getCustomerByID(filePath, id);
+        customerList.remove(customer);
+
+        FileWriterUtil.overwriteTextToFile(filePath, CSVFormatterUtil.toCSVStringNoFormat(customerList));
+    }
+
+    public static void editCustomerByID(String filePath, int id, String firstName, String lastName, String phoneNumber) {
         List<Customer> customerList = FileReaderUtil.readObjects(filePath, new CustomerMapper());
 
+        if (!ValidatorUtil.validatePhoneNumber(phoneNumber)) {
+            throw new RuntimeException(phoneNumber + " invalid phone number!!!");
+        }
+        if (isPhoneNumberExist(filePath, phoneNumber)) {
+            throw new RuntimeException("Phone number " + phoneNumber + " already exist!!!");
+        }
+        if (!EntityIDService.isIDExist(filePath, id, new CustomerMapper())) {
+            throw new RuntimeException("ERROR!\n Customer with id № " + id + " not found!!!");
+        }
+        Integer index = null;
         for (Customer customer : customerList) {
-            if (customer.getPhoneNumber().equals(phoneNumber)) {
-                return true;
+            if (customer.getId() == id) {
+                index = customerList.indexOf(customer);
+            }
+            if (isPhoneNumberExist(filePath, phoneNumber)) {
+                throw new RuntimeException("Phone number " + phoneNumber + " already exist!!!");
             }
         }
-        return false;
+        customerList.set(index, new Customer(firstName, lastName, id, phoneNumber));
+
+        FileWriterUtil.overwriteTextToFile(filePath, CSVFormatterUtil.toCSVStringNoFormat(customerList));
     }
 }
 
