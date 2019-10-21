@@ -66,7 +66,6 @@ public class App {
         orders.add(order3);
         orders.add(order4);
 
-
 //        FileWriterUtil.writeTextToFile("orders.csv",CSVFormatterUtil.toCSVStringNoFormat(orders));
 
 
@@ -130,7 +129,6 @@ public class App {
 
 //        ProductService.editProductByID("products.csv", 2,"Косів Гуцулія+",100.33,"Зарплата у вчителів = 4000");
 
-
         List<Order> list = FileReaderUtil.readObjects("orders.csv",new OrderMapper());
         FileWriterUtil.writeTextToFile("orders.csv", CSVFormatterUtil.toCSVStringNoFormat(list));
 
@@ -138,9 +136,6 @@ public class App {
         Order newOrder = OrderService.createNewOrder("orders.csv", 993,11,30,1000,3,5);
         orders.add(newOrder);
         FileWriterUtil.writeTextToFile("orders.csv",newOrder.toCSVFileString());
-
-
-
 
     }
 }
