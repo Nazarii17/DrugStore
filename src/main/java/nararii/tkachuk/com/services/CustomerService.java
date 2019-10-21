@@ -8,6 +8,7 @@ import nararii.tkachuk.com.utils.FileReaderUtil;
 import nararii.tkachuk.com.utils.FileWriterUtil;
 import nararii.tkachuk.com.utils.ValidatorUtil;
 
+import java.io.File;
 import java.util.List;
 
 public class CustomerService {
@@ -46,6 +47,10 @@ public class CustomerService {
     }
 
     public static Customer createNewCustomer(String filePath, String firstName, String lastName, String phoneNumber) {
+
+        if (!EntityIDService.isFileExist(filePath)){
+            FileWriterUtil.createFileIfNotExists(filePath);
+        }
 
         if ((!ValidatorUtil.validatePhoneNumber(phoneNumber) | isPhoneNumberExist(filePath, phoneNumber))) {
             throw new RuntimeException("Далбайоб, введи нормальний телефон, гавно ти собаче, щоб тебе качка копнула, сука!!!");

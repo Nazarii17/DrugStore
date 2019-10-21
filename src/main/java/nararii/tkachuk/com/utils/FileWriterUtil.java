@@ -8,19 +8,19 @@ public final class FileWriterUtil {
         throw new UnsupportedOperationException();
     }
 
-    public static String createFileIfNotExists(String URL) {
+    public static String createFileIfNotExists(String filePath) {
 
         try {
-            File fileName = new File(URL);
+            File fileName = new File(filePath);
             if (!fileName.exists()) {
                 fileName.createNewFile();
-                System.out.println("File " + URL + " created");
-            } else System.out.println("File " + URL + " already existed");
+                System.out.println("File " + filePath + " created");
+            } else System.out.println("File " + filePath + " already existed");
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Error" + e);
         }
-        return URL;
+        return filePath;
     }
     //    public void writeTextToFile(String text) {
 //

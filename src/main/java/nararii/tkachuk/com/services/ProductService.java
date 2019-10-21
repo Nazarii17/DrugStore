@@ -48,6 +48,9 @@ public class ProductService {
 
     public static Product createNewProduct(String filePath, String name, Double price, String info) {
 
+        if (!EntityIDService.isFileExist(filePath)) {
+            FileWriterUtil.createFileIfNotExists(filePath);
+        }
         if (EntityIDService.isPriceNotZero(new BigDecimal(price))) {
             throw new RuntimeException("Price can't be zero!!!");
         }
@@ -62,7 +65,6 @@ public class ProductService {
                 EntityIDService.generateIDFromFile(EntityIDService.getIDFilePath(filePath)),
                 new BigDecimal(price).setScale(2, RoundingMode.HALF_EVEN),
                 info);
-
     }
 
     public static void deleteProductByID(String filePath, int id) {

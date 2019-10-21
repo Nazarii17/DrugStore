@@ -9,6 +9,7 @@ import nararii.tkachuk.com.mappers.CustomerMapper;
 import nararii.tkachuk.com.utils.FileReaderUtil;
 import nararii.tkachuk.com.utils.FileWriterUtil;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,10 +26,11 @@ public class EntityIDService {
     public static String findMaxID(List<EntityID> list) {
         ArrayList<Integer> IDList = new ArrayList<>();
 
-        for (EntityID id : list) {
+        if (list.isEmpty()) {
+            return "0" + "\n";
+        } else for (EntityID id : list) {
             IDList.add(id.getId());
         }
-
         return Collections.max(IDList).toString() + "\n";
     }
 
@@ -49,21 +51,10 @@ public class EntityIDService {
         return id + 1;
     }
 
-    public static Boolean isPhoneNumberExist(String filePath, String phoneNumber) {
-        List<Customer> customerList = FileReaderUtil.readObjects(filePath, new CustomerMapper());
-
-        for (Customer customer : customerList) {
-            if (customer.getPhoneNumber().equals(phoneNumber)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static  <T extends EntityID> Boolean isIDExist(String filePath,Integer id, CSVMapper csvMapper){
+    public static <T extends EntityID> Boolean isIDExist(String filePath, Integer id, CSVMapper csvMapper) {
         List<T> IDList = FileReaderUtil.readObjects(filePath, csvMapper);
-        for (T t : IDList){
-            if (t.getId().equals(id)){
+        for (T t : IDList) {
+            if (t.getId().equals(id)) {
                 return true;
             }
         }
@@ -81,12 +72,12 @@ public class EntityIDService {
 
     }
 
-    public static <T extends Nameble> boolean isNameExist(String filePath, String name, CSVMapper<T> csvMapper){
+    public static <T extends Nameble> boolean isNameExist(String filePath, String name, CSVMapper<T> csvMapper) {
 
         List<T> list = FileReaderUtil.readObjects(filePath, csvMapper);
 
-        for (T t : list){
-            if (t.getName().equals(name)){
+        for (T t : list) {
+            if (t.getName().equals(name)) {
                 return true;
             }
         }
@@ -94,7 +85,13 @@ public class EntityIDService {
         return false;
     }
 
-
+    public static Boolean isFileExist(String filePath) {
+        File file = new File(filePath);
+        if (file.exists()) {
+            return true;
+        }
+        return false;
+    }
 }
 
 

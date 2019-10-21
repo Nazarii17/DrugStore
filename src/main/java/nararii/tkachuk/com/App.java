@@ -99,14 +99,14 @@ public class App {
 //        FileWriterUtil.writeTextToFile("customers.csv", newCustomer.toCSVFileString());
 //
 //        Customer newCustomer1 = CustomerService.createNewCustomer("customers.csv",
-//                "Jack","Daniels","987735554");
+//                "Jack","Daniels","989735554");
 //        customers.add(newCustomer1);
 //        FileWriterUtil.writeTextToFile("customers.csv", newCustomer1.toCSVFileString());
 
-//        Product newProduct = ProductService.createNewProduct("products.csv","Жорсткезне єбашиво",
-//                                                                   20.40,"Мама мене їбошить");
-//        products.add(newProduct);
-//        FileWriterUtil.writeTextToFile("products.csv", newProduct.toCSVFileString());
+        Product newProduct = ProductService.createNewProduct("product.csv","Жорсткезне єбашиво++",
+                                                                   20.40,"Мама мене їбошить");
+        products.add(newProduct);
+        FileWriterUtil.writeTextToFile("product.csv", newProduct.toCSVFileString());
 //        Product newProduct1 = ProductService.createNewProduct("products.csv","Коломийський грьоб",
 //                                                                   4.40,"Тату мене їбошить");
 //        products.add(newProduct1);
@@ -128,7 +128,7 @@ public class App {
 
 //        CustomerService.deleteCustomerByID("customers.csv", 22);
 
-        CustomerService.editCustomerByID("customers.csv",32,"Cool","Cash", "231132554");
+//        CustomerService.editCustomerByID("customers.csv",32,"Cool","Cash", "231132554");
 
 //        ProductService.editProductByID("products.csv", 2,"Косів Гуцулія+",100.33,"Зарплата у вчителів = 4000");
 
