@@ -103,19 +103,17 @@ public class App {
 //        customers.add(newCustomer1);
 //        FileWriterUtil.writeTextToFile("customers.csv", newCustomer1.toCSVFileString());
 
-        Product newProduct = ProductService.createNewProduct("product.csv","Жорсткезне єбашиво++",
-                                                                   20.40,"Мама мене їбошить");
-        products.add(newProduct);
-        FileWriterUtil.writeTextToFile("product.csv", newProduct.toCSVFileString());
-//        Product newProduct1 = ProductService.createNewProduct("products.csv","Коломийський грьоб",
+//        Product newProduct = ProductService.createNewProduct("product.csv","Жорсткезне єбашиво++",
+//                                                                   20.40,"Мама мене їбошить");
+//        products.add(newProduct);
+//        FileWriterUtil.writeTextToFile("product.csv", newProduct.toCSVFileString());
+////        Product newProduct1 = ProductService.createNewProduct("products.csv","Коломийський грьоб",
 //                                                                   4.40,"Тату мене їбошить");
 //        products.add(newProduct1);
 //        FileWriterUtil.writeTextToFile("products.csv", newProduct1.toCSVFileString());
 
 
-//        List<Order> list = FileReaderUtil.readObjects("orders.csv",new OrderMapper());
-//        System.out.println(list.get(0));
-//        FileWriterUtil.writeTextToFile("orders.csv", CSVFormatterUtil.toCSVStringNoFormat(list));
+//
 
 //        Order newOrder = OrderService.createNewOrder("orders.csv", 993,11,30,1000,3,5);
 //        orders.add(newOrder);
@@ -133,10 +131,13 @@ public class App {
 //        ProductService.editProductByID("products.csv", 2,"Косів Гуцулія+",100.33,"Зарплата у вчителів = 4000");
 
 
+        List<Order> list = FileReaderUtil.readObjects("orders.csv",new OrderMapper());
+        FileWriterUtil.writeTextToFile("orders.csv", CSVFormatterUtil.toCSVStringNoFormat(list));
 
 
-
-
+        Order newOrder = OrderService.createNewOrder("orders.csv", 993,11,30,1000,3,5);
+        orders.add(newOrder);
+        FileWriterUtil.writeTextToFile("orders.csv",newOrder.toCSVFileString());
 
 
 
