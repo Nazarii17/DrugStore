@@ -25,7 +25,7 @@ public class OrderService {
         return correctOne;
     }
 
-    public static int getIndexById(List<Order> list, int id){
+    public static int getIndexById(List<Order> list, int id) {
 
         Integer correctOne = null;
         for (Order order : list) {
@@ -34,7 +34,7 @@ public class OrderService {
 
             }
         }
-        return correctOne ;
+        return correctOne;
     }
 
     public static Order getOrdererByDate(String filePath, Integer year, Integer month, Integer day) {
@@ -49,12 +49,12 @@ public class OrderService {
         return correctOne;
     }
 
-    public static boolean isOrderExist(String filePath, Order newOrder){
+    public static boolean isOrderExist(String filePath, Order newOrder) {
 
         List<Order> list = FileReaderUtil.readObjects(filePath, new OrderMapper());
 
-        for (Order order : list){
-            if (order.equals(newOrder)){
+        for (Order order : list) {
+            if (order.equals(newOrder)) {
                 return true;
             }
         }
@@ -62,20 +62,24 @@ public class OrderService {
         return false;
     }
 
-    public static Order createNewOrder(String filePath,  Integer year, Integer month, Integer day,
-                                       Integer quantity, Integer customersID, Integer productsID){
+    public static Order createNewOrder(String filePath, Integer year, Integer month, Integer day,
+                                       Integer quantity, Integer customersID, Integer productsID) {
+
+        if (!EntityIDService.isFileExist(filePath)) {
+            FileWriterUtil.createFileIfNotExists(filePath);
+        }
 
         EntityIDService.createFileWithMaxID(filePath, new OrderMapper());
 
-        Order newOrder =  new Order(EntityIDService.generateIDFromFile(EntityIDService.getIDFilePath(filePath)),
+        Order newOrder = new Order(EntityIDService.generateIDFromFile(EntityIDService.getIDFilePath(filePath)),
                 LocalDate.of(year, month, day),
                 quantity,
                 new Customer(customersID),
                 new Product(productsID),
-                BigDecimal.valueOf(quantity).multiply(ProductService.getProductById("products.csv",productsID).getPrice()));
+                BigDecimal.valueOf(quantity).multiply(ProductService.getProductById("products.csv", productsID).getPrice()));
 
 
-        if (isOrderExist(filePath,newOrder)){
+        if (isOrderExist(filePath, newOrder)) {
             throw new RuntimeException("This order already exist");
 
         }
@@ -83,11 +87,38 @@ public class OrderService {
         return newOrder;
     }
 
-    public static void deleteOrderByID(String filePath, int id){
+    public static void deleteOrderByID(String filePath, int id) {
+        if (!EntityIDService.isIDExist(filePath, id, new OrderMapper())) {
+            throw new RuntimeException("ERROR!\n Order with id № " + id + " not found!!!");
+        }
         List<Order> orderList = FileReaderUtil.readObjects(filePath, new OrderMapper());
         System.out.println(orderList.size());
-        orderList.remove(getIndexById(orderList,id));
+        orderList.remove(getIndexById(orderList, id));
         System.out.println(orderList.size());
+        FileWriterUtil.overwriteTextToFile(filePath, CSVFormatterUtil.toCSVStringNoFormat(orderList));
+    }
+
+    public static void editOrderByID(String filePath, int id, Integer year, Integer month, Integer day,
+                                     Integer quantity, Integer customersID, Integer productsID) {
+        List<Order> orderList = FileReaderUtil.readObjects(filePath, new OrderMapper());
+
+        if (!EntityIDService.isIDExist(filePath, id, new OrderMapper())) {
+            throw new RuntimeException("ERROR!\n Order with id № " + id + " not found!!!");
+        }
+        Integer index = null;
+        for (Order order : orderList) {
+            if (order.getId() == id) {
+                index = orderList.indexOf(order);
+            }
+        }
+        orderList.set(index, new Order(id,
+                LocalDate.of(year, month, day),
+                quantity,
+                new Customer(customersID),
+                new Product(productsID),
+                BigDecimal.valueOf(quantity).multiply(ProductService.getProductById("products.csv", productsID).getPrice())
+        ));
+
         FileWriterUtil.overwriteTextToFile(filePath, CSVFormatterUtil.toCSVStringNoFormat(orderList));
     }
 }

@@ -129,14 +129,17 @@ public class App {
 
 //        ProductService.editProductByID("products.csv", 2,"Косів Гуцулія+",100.33,"Зарплата у вчителів = 4000");
 
-        FileWriterUtil.writeTextToFile("orders.csv", CSVFormatterUtil.toCSVStringNoFormat(orders));
-        List<Order> list = FileReaderUtil.readObjects("orders.csv",new OrderMapper());
-        FileWriterUtil.writeTextToFile("orders.csv", CSVFormatterUtil.toCSVStringNoFormat(list));
+//        FileWriterUtil.writeTextToFile("orders.csv", CSVFormatterUtil.toCSVStringNoFormat(orders));
+//        List<Order> list = FileReaderUtil.readObjects("orders.csv",new OrderMapper());
+//        FileWriterUtil.writeTextToFile("orders.csv", CSVFormatterUtil.toCSVStringNoFormat(list));
 
 
-        Order newOrder = OrderService.createNewOrder("orders.csv", 993,11,30,1000,3,5);
-        orders.add(newOrder);
-        FileWriterUtil.writeTextToFile("orders.csv",newOrder.toCSVFileString());
+//        Order newOrder = OrderService.createNewOrder("orders1.csv", 993,11,30,1000,3,5);
+//        orders.add(newOrder);
+//        FileWriterUtil.writeTextToFile("orders1.csv",newOrder.toCSVFileString());
+
+//        OrderService.deleteOrderByID("orders.csv",5);
+        OrderService.editOrderByID("orders.csv",9,1993,11,1,900,2,3);
 
     }
 }
